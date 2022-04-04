@@ -19,11 +19,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id",
-            nullable = false)
-    private Customer customerOrder;
-
     @Column(nullable = false)
     private int amount;
 

@@ -3,6 +3,8 @@ package ru.learnup.bookstore.dao.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -37,5 +39,17 @@ public class Book {
     @OneToOne(mappedBy = "bookWarehouse",
             cascade = CascadeType.ALL)
     private Warehouse warehouse;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id")
+    private List<OrderDetail> orderDetails;
+
+    public void addOrderDetailToBook(OrderDetail orderDetail) {
+        if (orderDetails == null) {
+            orderDetails = new ArrayList<>();
+        }
+        orderDetails.add(orderDetail);
+    }
+
 
 }

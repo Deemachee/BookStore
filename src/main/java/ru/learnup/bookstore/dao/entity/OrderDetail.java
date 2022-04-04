@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class OrderDetail implements Serializable {
+public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,6 @@ public class OrderDetail implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id", nullable = false)
     private Order orderDetailOrder;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book bookId;
 
     @Column(nullable = false)
     private int count;

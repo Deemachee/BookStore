@@ -28,8 +28,8 @@ public class Customer {
     @Column(nullable = false)
     private Date birthdate;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "customerOrder")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
     private List<Order> orders;
 
     public void addOrderToCustomer(Order order) {
@@ -37,6 +37,5 @@ public class Customer {
             orders = new ArrayList<>();
         }
         orders.add(order);
-        order.setCustomerOrder(this);
     }
 }
