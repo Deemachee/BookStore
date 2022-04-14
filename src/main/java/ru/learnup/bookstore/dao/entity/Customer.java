@@ -20,22 +20,11 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
     private Date birthdate;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customer_id")
-    private List<Order> orders;
-
-    public void addOrderToCustomer(Order order) {
-        if (orders == null) {
-            orders = new ArrayList<>();
-        }
-        orders.add(order);
-    }
 }

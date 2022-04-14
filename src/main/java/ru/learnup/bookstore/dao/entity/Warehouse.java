@@ -14,15 +14,15 @@ import java.io.Serializable;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Warehouse implements Serializable {
+public class Warehouse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book bookWarehouse;
+    @JoinColumn(name = "book_id", unique = true)
+    private Book book;
 
     @Column(nullable = false)
     private int count;

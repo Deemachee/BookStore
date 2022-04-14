@@ -16,22 +16,12 @@ public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column(unique = true,
-            nullable = false)
-    private String authorName;
+    @Column(unique = true, name = "author_name")
+    private String name;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "authorBook")
-    private List<Book> books;
-
-    public void addBookToAuthor(Book book) {
-        if (books == null) {
-            books = new ArrayList<>();
-        }
-        books.add(book);
-        book.setAuthorBook(this);
+    public Author(String name) {
+        this.name = name;
     }
-
 }

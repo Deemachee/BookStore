@@ -16,40 +16,23 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column(unique = true,
-            nullable = false)
+    @Column(unique = true)
     private String title;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "author_id",
-            nullable = false)
-    private Author authorBook;
-
-    @Column(nullable = false)
+    @Column
     private int year;
 
-    @Column(nullable = false)
+    @Column
     private int count_page;
 
-    @Column(nullable = false)
+    @Column
     private int price;
 
-    @OneToOne(mappedBy = "bookWarehouse",
-            cascade = CascadeType.ALL)
-    private Warehouse warehouse;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id")
-    private List<OrderDetail> orderDetails;
-
-    public void addOrderDetailToBook(OrderDetail orderDetail) {
-        if (orderDetails == null) {
-            orderDetails = new ArrayList<>();
-        }
-        orderDetails.add(orderDetail);
-    }
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private Author author;
 
 
 }

@@ -15,11 +15,11 @@ public class OrderDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id", nullable = false)
-    private Order orderDetailOrder;
+    @OneToOne(optional = false)
+    @JoinColumn(name = "order_id")
+    private Order order;
 
     @Column(nullable = false)
     private int count;

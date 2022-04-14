@@ -1,6 +1,7 @@
 package ru.learnup.bookstore.dao.service;
 
 import org.springframework.stereotype.Service;
+import ru.learnup.bookstore.dao.entity.Author;
 import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.repository.BookRepository;
 import java.util.List;
@@ -14,6 +15,10 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
+//    public List<Book> getBooksByAuthor(Author author) {
+//        return  bookRepository.findAllByAuthor(author);
+//    }
+
     public List<Book> getBooks() {
         return bookRepository.findAll();
     }
@@ -24,6 +29,10 @@ public class BookService {
 
     public Book getBookById(long id) {
         return bookRepository.getById(id);
+    }
+
+    public List<Book> findByAuthor(String name) {
+        return bookRepository.findByAuthor(name);
     }
 
 }

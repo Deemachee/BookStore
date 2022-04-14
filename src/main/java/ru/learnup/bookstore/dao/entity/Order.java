@@ -17,12 +17,12 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    @Column(nullable = false)
+    @OneToOne
+    private Customer customer;
+
+    @Column
     private int amount;
 
-    @OneToOne(mappedBy = "orderDetailOrder",
-            cascade = CascadeType.ALL)
-    private OrderDetail orderDetail;
 }
