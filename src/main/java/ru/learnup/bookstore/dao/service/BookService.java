@@ -15,10 +15,6 @@ public class BookService {
 
     private final BookRepository bookRepository;
 
-//    public List<Book> getBooksByAuthor(Author author) {
-//        return  bookRepository.findAllByAuthor(author);
-//    }
-
     public List<Book> getBooks() {
         return bookRepository.findAll();
     }
