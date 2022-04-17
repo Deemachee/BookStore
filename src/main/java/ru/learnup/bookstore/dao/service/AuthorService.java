@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.learnup.bookstore.dao.entity.Author;
 import ru.learnup.bookstore.dao.repository.AuthorRepository;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -22,8 +23,8 @@ public class AuthorService {
         return authorRepository.save(author);
     }
 
-    public Author getAuthorById(long id) {
-        return authorRepository.getById(id);
+    public Optional<Author> getAuthorById(long id) {
+        return authorRepository.findById(id);
     }
 
 }
