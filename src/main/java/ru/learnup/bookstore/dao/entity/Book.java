@@ -8,11 +8,19 @@ import java.util.List;
 
 @Entity
 @Table(name = "books")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
+@NoArgsConstructor
 public class Book {
+
+    public Book(Long id, String title, String imgUrl, int year, int count_page, int price, Author author) {
+        this.id = id;
+        this.title = title;
+        this.imgUrl = imgUrl;
+        this.year = year;
+        this.count_page = count_page;
+        this.price = price;
+        this.author = author;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +28,9 @@ public class Book {
 
     @Column(unique = true)
     private String title;
+
+    @Column
+    private String imgUrl;
 
     @Column
     private int year;
@@ -34,4 +45,16 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
+    @Override
+    public String toString() {
+        return "Book [" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", year=" + year +
+                ", count_page=" + count_page +
+                ", price=" + price +
+                ", author=" + author.getName() +
+                ']';
+    }
 }

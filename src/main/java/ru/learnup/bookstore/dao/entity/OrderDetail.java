@@ -7,10 +7,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "order_details")
-@Getter
-@Setter
-@ToString
-@RequiredArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderDetail {
 
     @Id

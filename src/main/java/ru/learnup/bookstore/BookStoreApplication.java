@@ -4,13 +4,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.entity.Product;
 import ru.learnup.bookstore.dao.service.*;
 
+import java.util.List;
+
 
 @SpringBootApplication
-public class BookStoreApplication {
+public class BookStoreApplication extends SpringBootServletInitializer {
 
     public static final Logger log = LoggerFactory.getLogger(BookStoreApplication.class);
 
@@ -32,10 +36,12 @@ public class BookStoreApplication {
 
         ProductService productService = context.getBean(ProductService.class);
 
+
+
         log.info("Product 1: {}", productService.findProductById(5L));
 
         log.info("authors: {}", authorService.getAuthors());
-        log.info("books: {}", bookService.getBooks());
+            log.info("books: {}", bookService.getBooks());
         log.info("warehouse: {}", warehouseService.getWarehouse());
         log.info("customers: {}", customerService.getCustomers());
         log.info("orders: {}", orderService.getOrders());
