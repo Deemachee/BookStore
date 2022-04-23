@@ -1,6 +1,8 @@
 package ru.learnup.bookstore.dao.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,17 +12,9 @@ import java.util.List;
 @Table(name = "books")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Book {
-
-    public Book(Long id, String title, String imgUrl, int year, int count_page, int price, Author author) {
-        this.id = id;
-        this.title = title;
-        this.imgUrl = imgUrl;
-        this.year = year;
-        this.count_page = count_page;
-        this.price = price;
-        this.author = author;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +23,7 @@ public class Book {
     @Column(unique = true)
     private String title;
 
-    @Column
+    @Column(name = "img_url")
     private String imgUrl;
 
     @Column
@@ -45,6 +39,21 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "warehouse_id")
+    private Warehouse warehouse;
+
+    public Book(String title, String imgUrl, int year, int count_page, int price, Author author, Warehouse warehouse) {
+        this.title = title;
+        this.imgUrl = imgUrl;
+        this.year = year;
+        this.count_page = count_page;
+        this.price = price;
+        this.author = author;
+        this.warehouse = warehouse;
+    }
+
     @Override
     public String toString() {
         return "Book [" +
@@ -55,6 +64,7 @@ public class Book {
                 ", count_page=" + count_page +
                 ", price=" + price +
                 ", author=" + author.getName() +
+                ", count_book=" + warehouse.getCount() +
                 ']';
     }
 }

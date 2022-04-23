@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Customer {
 
     @Id
@@ -23,4 +24,17 @@ public class Customer {
 
     @Column(nullable = false)
     private Date birthdate;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            mappedBy = "customer")
+    private List<Order> orders;
+
+    public void addOrderToCustomer(Order order) {
+        if (orders == null) {
+            orders = new ArrayList<>();
+        }
+        orders.add(order);
+        order.setCustomer(this);
+    }
 }

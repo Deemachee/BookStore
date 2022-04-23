@@ -9,13 +9,19 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_details_id")
+    private OrderDetail orderDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @Column
