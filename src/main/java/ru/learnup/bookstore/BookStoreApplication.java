@@ -1,13 +1,16 @@
 package ru.learnup.bookstore;
 
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import ru.learnup.bookstore.dao.entity.Author;
 import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.entity.Product;
+import ru.learnup.bookstore.dao.entity.Warehouse;
 import ru.learnup.bookstore.dao.service.*;
 
 import java.util.List;
@@ -36,25 +39,22 @@ public class BookStoreApplication extends SpringBootServletInitializer {
 
         ProductService productService = context.getBean(ProductService.class);
 
-
+        bookService.createCatalog();
 
         log.info("Product 1: {}", productService.findProductById(5L));
 
-        log.info("authors: {}", authorService.getAuthors());
-            log.info("books: {}", bookService.getBooks());
-        log.info("warehouse: {}", warehouseService.getWarehouse());
-        log.info("customers: {}", customerService.getCustomers());
-        log.info("orders: {}", orderService.getOrders());
-        log.info("order details: {}", orderDetailService.getOrderDetail());
+        log.info("books: {}", bookService.getBooks());
 
         String findAuthor = "Лев Толстой";
         log.info("Все книги автора {}: {}", findAuthor, bookService.findByAuthor(findAuthor));
 
-        Product product = productService.findProductById(6L).orElseThrow(Exception::new);
+        Product product = productService.findProductById(1L).orElseThrow(Exception::new);
         log.info("Текущее состояние продукта: {}", product.toString());
         product.setText("Text " + product.getVersion());
         productService.updateProduct(product);
-        Product product1 = productService.findProductById(6L).orElseThrow(Exception::new);
+        Product product1 = productService.findProductById(1L).orElseThrow(Exception::new);
+        product1.setText("Text " + product1.getVersion());
         log.info("Cостояние продукта после апдэйта: {}", product1.toString());
+
     }
 }

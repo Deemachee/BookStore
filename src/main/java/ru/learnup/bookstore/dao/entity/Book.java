@@ -1,20 +1,22 @@
 package ru.learnup.bookstore.dao.entity;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "books")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Book {
+public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,26 +34,28 @@ public class Book {
     @Column
     private int count_page;
 
+//    @OneToMany(mappedBy = "bookInOrder")
+//    private List<BookInOrder> bookInOrders;
+
     @Column
     private int price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,
+                fetch = FetchType.LAZY)
+//    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "author_id")
     private Author author;
-
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
-    public Book(String title, String imgUrl, int year, int count_page, int price, Author author, Warehouse warehouse) {
+    public Book(String title, String imgUrl, int year, int count_page, int price) {
         this.title = title;
         this.imgUrl = imgUrl;
         this.year = year;
         this.count_page = count_page;
         this.price = price;
-        this.author = author;
-        this.warehouse = warehouse;
     }
 
     @Override
@@ -66,5 +70,18 @@ public class Book {
                 ", author=" + author.getName() +
                 ", count_book=" + warehouse.getCount() +
                 ']';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Book book = (Book) o;
+        return id != null && Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

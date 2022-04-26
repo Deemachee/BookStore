@@ -1,19 +1,20 @@
 package ru.learnup.bookstore.dao.entity;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "customers")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,16 +26,37 @@ public class Customer {
     @Column(nullable = false)
     private Date birthdate;
 
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            mappedBy = "customer")
-    private List<Order> orders;
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", birthdate=" + birthdate +
+                '}';
+    }
 
-    public void addOrderToCustomer(Order order) {
-        if (orders == null) {
-            orders = new ArrayList<>();
-        }
-        orders.add(order);
-        order.setCustomer(this);
+    //    @OneToMany(cascade = CascadeType.ALL,
+//            fetch = FetchType.EAGER,
+//            mappedBy = "customer")
+//    private List<Order> orders;
+//
+//    public void addOrderToCustomer(Order order) {
+//        if (orders == null) {
+//            orders = new ArrayList<>();
+//        }
+//        orders.add(order);
+//        order.setCustomer(this);
+//    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Customer customer = (Customer) o;
+        return id != null && Objects.equals(id, customer.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

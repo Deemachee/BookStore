@@ -18,8 +18,8 @@ public class WarehouseService {
         return warehouseRepository.findAll();
     }
 
-    public Warehouse addWarehouse(Warehouse warehouse) {
-        return warehouseRepository.save(warehouse);
+    public void addWarehouse(Warehouse warehouse) {
+        warehouseRepository.save(warehouse);
     }
 
     public Warehouse getWarehouseById(long id) {
