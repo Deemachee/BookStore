@@ -35,7 +35,7 @@ public class UserController {
         User entity = new User();
         entity.setUserName(userView.getLogin());
         String password = passwordEncoder.encode(userView.getPassword());
-        entity.setPassword(userView.getPassword());
+        entity.setPassword(password);
         Set<UserRole> roles = userView.getRoles()
                 .stream()
                 .map(RoleView::getRole)
