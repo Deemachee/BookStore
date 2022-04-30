@@ -11,6 +11,7 @@ import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.entity.Warehouse;
 import ru.learnup.bookstore.dao.repository.BookRepository;
 import ru.learnup.bookstore.specifications.BookSpecification;
+import ru.learnup.bookstore.view.BookView;
 
 import javax.persistence.LockModeType;
 import javax.persistence.OptimisticLockException;
@@ -67,14 +68,14 @@ public class BookService {
         try {
             return bookRepository.save(book);
         } catch (OptimisticLockException e) {
-            log.warn("Optimistic lock exception for post {}", book.getId());
+            log.warn("Optimistic lock exception for update book {}", book.getId());
             throw e;
         }
     }
 
     public List<Book> getBookBy(BookFilter filter) {
         Specification<Book> specification = where(BookSpecification.byFilter(filter));
-       return bookRepository.findAll(specification);
+        return bookRepository.findAll(specification);
     }
 
     @Transactional
@@ -97,8 +98,6 @@ public class BookService {
             warehouse.setCount(quantity);
             book.setAuthor(author);
             book.setWarehouse(warehouse);
-//            author.addBookToAuthor(book);
-//            authorService.addAuthor(author);
             addBook(book);
             log.info("Книга " + book + " добавлена в магазин !");
         } else {

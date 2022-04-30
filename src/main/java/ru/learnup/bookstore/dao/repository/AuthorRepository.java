@@ -11,4 +11,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Query(value = "select * from authors where lower(author_name) = lower(:name);", nativeQuery = true)
     Author findByNameQuery(String name);
+
+    @Query(value = "from Author a where a.id = :id")
+    Author findByIdQuery(long id);
 }

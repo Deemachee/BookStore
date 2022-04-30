@@ -25,8 +25,8 @@ public class BookView {
 
     private int price;
 
-    private Author author;
+    private AuthorView author;
 
-    private Warehouse warehouse;
+    private WarehouseView warehouse;
 
 }

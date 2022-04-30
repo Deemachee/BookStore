@@ -13,7 +13,6 @@ import java.util.Objects;
 @Table(name = "authors")
 @Getter
 @Setter
-//@AllArgsConstructor
 @NoArgsConstructor
 public class Author implements Serializable {
 
@@ -24,11 +23,6 @@ public class Author implements Serializable {
     @Column(unique = true, name = "author_name")
     private String name;
 
-//    @OneToMany(cascade = CascadeType.ALL,
-//            mappedBy = "author")
-//    @ToString.Exclude
-//    private List<Book> books;
-
     public Author(Long id, String name) {
         this.id = id;
         this.name = name;
@@ -37,15 +31,6 @@ public class Author implements Serializable {
     public Author(String name) {
         this.name = name;
     }
-
-
-//    public void addBookToAuthor(Book book) {
-//        if (books == null) {
-//            books = new ArrayList<>();
-//        }
-//        books.add(book);
-//        book.setAuthor(this);
-//    }
 
     @Override
     public String toString() {

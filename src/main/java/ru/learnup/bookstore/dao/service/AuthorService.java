@@ -21,12 +21,17 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public void addAuthor(Author author) {
-        authorRepository.save(author);
+    public Author addAuthor(Author author) {
+        return authorRepository.save(author);
     }
 
-    public Optional<Author> getAuthorById(long id) {
-        return authorRepository.findById(id);
+    public boolean deleteAuthor(Long id) {
+        authorRepository.deleteById(id);
+        return true;
+    }
+
+    public Author getAuthorById(long id) {
+        return authorRepository.findByIdQuery(id);
     }
 
     public Author findByAuthorName(String name) {

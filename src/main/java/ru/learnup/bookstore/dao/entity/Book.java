@@ -40,9 +40,10 @@ public class Book implements Serializable {
     @Column
     private int price;
 
-    @ManyToOne(cascade = CascadeType.ALL,
+    @ManyToOne(cascade = {CascadeType.PERSIST,
+            CascadeType.DETACH, CascadeType.MERGE,
+            CascadeType.REFRESH},
                 fetch = FetchType.LAZY)
-//    @Fetch(FetchMode.JOIN)
     @JoinColumn(name = "author_id")
     private Author author;
 
@@ -50,12 +51,14 @@ public class Book implements Serializable {
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
-    public Book(String title, String imgUrl, int year, int count_page, int price) {
+    public Book(String title, String imgUrl, int year, int count_page, int price, Author author, Warehouse warehouse) {
         this.title = title;
         this.imgUrl = imgUrl;
         this.year = year;
         this.count_page = count_page;
         this.price = price;
+        this.author = author;
+        this.warehouse = warehouse;
     }
 
     @Override

@@ -11,8 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 public class AuthorView {
 
-    private Long id;
-
     private String name;
 
 }

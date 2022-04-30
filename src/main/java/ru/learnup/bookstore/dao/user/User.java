@@ -5,10 +5,7 @@ import org.hibernate.Hibernate;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -25,12 +22,28 @@ public class User implements UserDetails {
 
     private String password;
 
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    private Set<UserRole> roles = new LinkedHashSet<>();
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_roles"
+//            ,
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new LinkedHashSet<>();
+
+//    public void addRole(Role role) {
+//        if (roles == null) {
+//            roles = new HashSet<>();
+//        }
+//        roles.add(role);
+//    }
+
+    public void removeBook(Role role) {
+        this.getRoles().remove(role);
+        role.getUsers().remove(this);
+    }
 
     @Override
-    @Transient
-    public Collection<UserRole> getAuthorities() {
+    public Collection<Role> getAuthorities() {
         return roles;
     }
 

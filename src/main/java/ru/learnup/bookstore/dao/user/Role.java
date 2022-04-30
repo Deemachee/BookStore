@@ -3,9 +3,9 @@ package ru.learnup.bookstore.dao.user;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
-import ru.learnup.bookstore.view.RoleView;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,8 +14,8 @@ import java.util.Set;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Table(name = "user_roles")
-public class UserRole implements GrantedAuthority {
+@Table(name = "roles")
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,18 +24,15 @@ public class UserRole implements GrantedAuthority {
     @Column
     private String role;
 
-    public UserRole(String role) {
+    public Role(String role) {
         this.role = role;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL )
-    @JoinTable(name = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH,
+                    CascadeType.MERGE, CascadeType.REFRESH})
     private Set<User> users = new LinkedHashSet<>();
 
-    public UserRole(RoleView roleView) {
-    }
-
-    @Transient
     @Override
     public String getAuthority() {
         return role;
@@ -45,8 +42,8 @@ public class UserRole implements GrantedAuthority {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        UserRole userRole = (UserRole) o;
-        return id != null && Objects.equals(id, userRole.id);
+        Role role = (Role) o;
+        return id != null && Objects.equals(id, role.id);
     }
 
     @Override
@@ -56,7 +53,7 @@ public class UserRole implements GrantedAuthority {
 
     @Override
     public String toString() {
-        return "UserRole{" +
+        return "Role{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
                 '}';

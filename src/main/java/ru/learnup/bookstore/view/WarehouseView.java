@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class WarehouseView {
 
-    private Long id;
     private int count;
 }
