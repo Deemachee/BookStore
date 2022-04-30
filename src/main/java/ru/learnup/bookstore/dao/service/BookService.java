@@ -2,7 +2,6 @@ package ru.learnup.bookstore.dao.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import ru.learnup.bookstore.dao.entity.Author;
 import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.entity.Warehouse;
 import ru.learnup.bookstore.dao.repository.BookRepository;
-import ru.learnup.bookstore.dao.repository.BookSpecification;
+import ru.learnup.bookstore.specifications.BookSpecification;
 
 import javax.persistence.LockModeType;
 import javax.persistence.OptimisticLockException;

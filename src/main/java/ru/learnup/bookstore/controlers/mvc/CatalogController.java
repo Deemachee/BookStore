@@ -1,4 +1,4 @@
-package ru.learnup.bookstore.controlers;
+package ru.learnup.bookstore.controlers.mvc;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;

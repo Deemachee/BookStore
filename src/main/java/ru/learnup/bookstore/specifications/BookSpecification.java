@@ -1,15 +1,12 @@
-package ru.learnup.bookstore.dao.repository;
+package ru.learnup.bookstore.specifications;
 
 import org.springframework.data.jpa.domain.Specification;
 import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.service.BookFilter;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+
 import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class BookSpecification  {
 

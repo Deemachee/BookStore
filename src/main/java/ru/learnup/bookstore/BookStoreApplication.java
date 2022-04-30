@@ -11,9 +11,13 @@ import ru.learnup.bookstore.dao.entity.Author;
 import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.entity.Product;
 import ru.learnup.bookstore.dao.entity.Warehouse;
+import ru.learnup.bookstore.dao.repository.UserRolesRepository;
 import ru.learnup.bookstore.dao.service.*;
+import ru.learnup.bookstore.dao.user.User;
+import ru.learnup.bookstore.dao.user.UserRole;
 
 import java.util.List;
+import java.util.Set;
 
 
 @SpringBootApplication
@@ -25,17 +29,11 @@ public class BookStoreApplication extends SpringBootServletInitializer {
 
         ConfigurableApplicationContext context = SpringApplication.run(BookStoreApplication.class, args);
 
-        AuthorService authorService = context.getBean(AuthorService.class);
-
         BookService bookService = context.getBean(BookService.class);
 
-        WarehouseService warehouseService = context.getBean(WarehouseService.class);
+        UserService userService = context.getBean(UserService.class);
 
-        CustomerService customerService = context.getBean(CustomerService.class);
-
-        OrderService orderService = context.getBean(OrderService.class);
-
-        OrderDetailService orderDetailService = context.getBean(OrderDetailService.class);
+        UserRolesRepository userRolesRepository = context.getBean(UserRolesRepository.class);
 
         ProductService productService = context.getBean(ProductService.class);
 
@@ -49,12 +47,23 @@ public class BookStoreApplication extends SpringBootServletInitializer {
         log.info("Все книги автора {}: {}", findAuthor, bookService.findByAuthor(findAuthor));
 
         Product product = productService.findProductById(1L).orElseThrow(Exception::new);
-        log.info("Текущее состояние продукта: {}", product.toString());
         product.setText("Text " + product.getVersion());
+        log.info("Текущее состояние продукта: {}", product.toString());
         productService.updateProduct(product);
         Product product1 = productService.findProductById(1L).orElseThrow(Exception::new);
         product1.setText("Text " + product1.getVersion());
         log.info("Cостояние продукта после апдэйта: {}", product1.toString());
 
+        log.info(userService.findAllUsers().toString());
+
+//        UserRole role = new UserRole();
+//        User user = new User();
+//        user.setUserName("dmitriy");
+//        user.setPassword("221202");
+//        role.setRole("ROLE_ADMIN");
+//        user.setRoles(Set.of(role));
+//        role.setUsers(Set.of(user));
+//        userService.create(user);
+//        userRolesRepository.save(role);
     }
 }

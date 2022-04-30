@@ -1,14 +1,14 @@
-package ru.learnup.bookstore.controlers;
+package ru.learnup.bookstore.controlers.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class CartController {
 
-    @GetMapping("/")
-    public String home(Model model) {
-        return "home";
+    @GetMapping("/cart")
+    public String cart(Model model) {
+        return "cart";
     }
 }
