@@ -34,6 +34,7 @@ public class UserController {
     public boolean createUser(@RequestBody UserView userView) {
         User entity = new User();
         entity.setUserName(userView.getLogin());
+        String password = passwordEncoder.encode(userView.getPassword());
         entity.setPassword(userView.getPassword());
         Set<UserRole> roles = userView.getRoles()
                 .stream()
