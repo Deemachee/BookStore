@@ -16,6 +16,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Author implements Serializable {
 
+    private static final long serialVersionUID = 5963832101699406070L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

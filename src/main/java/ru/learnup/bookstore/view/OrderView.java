@@ -6,19 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.learnup.bookstore.dao.entity.Customer;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserView {
+public class OrderView {
 
-    private String login;
+    private UserCartView customer;
 
-    private String password;
+    private int amount;
 
-    private CustomerUserView customer;
-
-    private Set<RoleView> roles;
+    private List<OrderDetailView> orderDetails;
 }

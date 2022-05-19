@@ -6,13 +6,16 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import ru.learnup.bookstore.BookStoreApplication;
+import ru.learnup.bookstore.dao.entity.Customer;
 import ru.learnup.bookstore.dao.mapper.UserViewMapper;
 import ru.learnup.bookstore.dao.service.UserService;
-import ru.learnup.bookstore.dao.user.Role;
-import ru.learnup.bookstore.dao.user.User;
+import ru.learnup.bookstore.dao.entity.Role;
+import ru.learnup.bookstore.dao.entity.User;
+import ru.learnup.bookstore.view.CustomerUserView;
+import ru.learnup.bookstore.view.CustomerView;
 import ru.learnup.bookstore.view.RoleView;
 import ru.learnup.bookstore.view.UserView;
-import javax.persistence.EntityExistsException;
+
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Objects;
@@ -35,12 +38,13 @@ public class UserController {
     }
 
 
-//    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     @PostMapping
     public Boolean createUser(@RequestBody UserView body) {
         User entity = new User();
         entity.setUserName(body.getLogin());
         entity.setPassword(body.getPassword());
+        entity.setCustomer(new Customer(body.getCustomer().getName(), body.getCustomer().getSurname()));
         entity.setRoles(
                 body.getRoles()
                         .stream()
@@ -59,6 +63,7 @@ public class UserController {
                 .stream()
                 .map(user -> UserView.builder()
                         .login(user.getUsername())
+                        .customer(new CustomerUserView(user.getCustomer().getName(), user.getCustomer().getSurname()))
                         .roles(user.getRoles().stream()
                                 .map(RoleView::new)
                                 .collect(Collectors.toSet())
@@ -86,6 +91,9 @@ public class UserController {
             throw new RuntimeException("Entity has bad login");
         }
         User user = userService.findUserByLogin(login);
+        if (user == null) {
+            throw new EntityNotFoundException("There are no authors with this login ");
+        }
         if (!user.getPassword().equals(passwordEncoder.encode(body.getPassword()))) {
             user.setPassword(passwordEncoder.encode(body.getPassword()));
         }

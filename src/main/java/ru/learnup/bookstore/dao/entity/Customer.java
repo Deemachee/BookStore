@@ -5,7 +5,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,6 +16,8 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Customer implements Serializable {
 
+    private static final long serialVersionUID = -4164880548957054817L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,13 +26,28 @@ public class Customer implements Serializable {
     private String name;
 
     @Column(nullable = false)
-    private Date birthdate;
+    private String surname;
+
+    public Customer(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+//    @OneToMany(mappedBy = "customer",
+////            fetch = FetchType.EAGER,
+//            cascade = CascadeType.PERSIST)
+//    private List<Order> orders;
+
+    @OneToOne(mappedBy = "customer",
+            cascade = CascadeType.ALL)
+    private User user;
+
 
     @Override
     public String toString() {
         return "Customer{" +
                 "name='" + name + '\'' +
-                ", birthdate=" + birthdate +
+                ", surname=" + surname +
                 '}';
     }
 

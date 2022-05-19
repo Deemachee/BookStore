@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,32 +17,38 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Order implements Serializable {
 
+    private static final long serialVersionUID = -5103820561584686983L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "order_details_id")
-//    private OrderDetail orderDetail;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customer_id")
-//    private Customer customer;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @OneToMany(mappedBy = "orderIdInOrder")
-    private List<BookInOrder> bookInOrders;
+    @OneToMany(mappedBy = "order")
+    private List<OrderDetail> orderDetails;
 
     @Override
     public String toString() {
         return "Order{" +
-//                "orderDetail=" + orderDetail +
-//                ", customer=" + customer +
+                ", customer=" + customer +
                 ", amount=" + amount +
                 '}';
     }
 
     @Column
     private int amount;
+
+    public void addOrderDetailToOrder(OrderDetail orderDetail) {
+        if (orderDetails == null) {
+            orderDetails = new ArrayList<>();
+        }
+        orderDetails.add(orderDetail);
+        orderDetail.setOrder(this);
+    }
 
     @Override
     public boolean equals(Object o) {

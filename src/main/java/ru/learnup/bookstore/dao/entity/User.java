@@ -1,9 +1,8 @@
-package ru.learnup.bookstore.dao.user;
+package ru.learnup.bookstore.dao.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -14,33 +13,25 @@ import java.util.*;
 @Table(name = "users")
 public class User implements UserDetails {
 
+    private static final long serialVersionUID = -3375053340928924683L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String userName;
 
+    @Column
     private String password;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles"
-//            ,
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+    @JoinTable(name = "user_roles")
     private Set<Role> roles = new LinkedHashSet<>();
-
-//    public void addRole(Role role) {
-//        if (roles == null) {
-//            roles = new HashSet<>();
-//        }
-//        roles.add(role);
-//    }
-
-    public void removeBook(Role role) {
-        this.getRoles().remove(role);
-        role.getUsers().remove(this);
-    }
 
     @Override
     public Collection<Role> getAuthorities() {

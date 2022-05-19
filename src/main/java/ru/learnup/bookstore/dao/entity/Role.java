@@ -1,11 +1,10 @@
-package ru.learnup.bookstore.dao.user;
+package ru.learnup.bookstore.dao.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -16,6 +15,8 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
+
+    private static final long serialVersionUID = 275604823237318880L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

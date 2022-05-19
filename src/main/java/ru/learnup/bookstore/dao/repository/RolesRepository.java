@@ -2,7 +2,7 @@ package ru.learnup.bookstore.dao.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.learnup.bookstore.dao.user.Role;
+import ru.learnup.bookstore.dao.entity.Role;
 
 import java.util.List;
 import java.util.Set;

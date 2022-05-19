@@ -1,12 +1,10 @@
 package ru.learnup.bookstore.dao.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.entity.Order;
-import ru.learnup.bookstore.dao.entity.OrderDetail;
 import ru.learnup.bookstore.dao.repository.OrderRepository;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -30,7 +28,7 @@ public class OrderService {
         return orderRepository.getById(id);
     }
 
-//    public Order findOrderById(long id) { return orderRepository.findByIdQuery(id);}
+    public Optional<Order> findOrderById(long id) { return orderRepository.findById(id);}
 
 
 

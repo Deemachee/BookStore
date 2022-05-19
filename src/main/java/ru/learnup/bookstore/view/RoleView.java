@@ -1,7 +1,7 @@
 package ru.learnup.bookstore.view;
 
 import lombok.*;
-import ru.learnup.bookstore.dao.user.Role;
+import ru.learnup.bookstore.dao.entity.Role;
 
 @Data
 @Getter
@@ -13,6 +13,7 @@ public class RoleView {
     private String role;
 
     public RoleView(Role role) {
+
         this.role = role.getRole();
     }
 }

@@ -18,6 +18,8 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Book implements Serializable {
 
+    private static final long serialVersionUID = 1853792527001723473L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,16 +36,17 @@ public class Book implements Serializable {
     @Column
     private int count_page;
 
-//    @OneToMany(mappedBy = "bookInOrder")
-//    private List<BookInOrder> bookInOrders;
+//    @OneToMany(mappedBy = "book")
+//    private List<OrderDetail> bookInOrders;
 
     @Column
     private int price;
 
     @ManyToOne(cascade = {CascadeType.PERSIST,
             CascadeType.DETACH, CascadeType.MERGE,
-            CascadeType.REFRESH},
-                fetch = FetchType.LAZY)
+            CascadeType.REFRESH}
+//            ,fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "author_id")
     private Author author;
 

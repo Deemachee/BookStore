@@ -75,6 +75,9 @@ public class BookController {
             throw new RuntimeException("Entity has bad Id");
         }
         Book book = bookService.findBookById(bookId);
+        if (book == null) {
+            throw new EntityNotFoundException("There are no books with this id ");
+        }
         if (!book.getTitle().equals(body.getTitle())) {
             book.setTitle(body.getTitle());
         }

@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,6 +17,8 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Warehouse implements Serializable{
 
+    private static final long serialVersionUID = -7233678887165593315L;
+
     public Warehouse(int count) {
         this.count = count;
     }
@@ -22,6 +26,11 @@ public class Warehouse implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Version
+    @Valid
+    @NotBlank
+    private Long version;
 
     @Column(nullable = false)
     private int count;

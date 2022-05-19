@@ -51,7 +51,7 @@ public class BookService {
     }
 
     public Book findBookById(long id) {
-        return bookRepository.findByIdQuery(id);
+        return bookRepository.findById(id).orElse(null);
     }
 
     public List<Book> findByAuthor(String name) {
@@ -62,15 +62,9 @@ public class BookService {
         return bookRepository.findByTitleQuery(title);
     }
 
-    @Transactional
-    @Lock(value = LockModeType.OPTIMISTIC)
+
     public Book update(Book book) {
-        try {
             return bookRepository.save(book);
-        } catch (OptimisticLockException e) {
-            log.warn("Optimistic lock exception for update book {}", book.getId());
-            throw e;
-        }
     }
 
     public List<Book> getBookBy(BookFilter filter) {

@@ -1,10 +1,13 @@
 package ru.learnup.bookstore.dao.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.learnup.bookstore.dao.entity.Warehouse;
 import ru.learnup.bookstore.dao.repository.WarehouseRepository;
+
 import java.util.List;
 
+@Slf4j
 @Service
 public class WarehouseService {
 
@@ -24,6 +27,17 @@ public class WarehouseService {
 
     public Warehouse getWarehouseById(long id) {
         return warehouseRepository.getById(id);
+    }
+
+//    @Transactional
+//    @Lock(value = LockModeType.OPTIMISTIC_FORCE_INCREMENT)
+    public void updateWarehouse(Warehouse warehouse) {
+//        try {
+            warehouseRepository.save(warehouse);
+//        } catch (OptimisticLockException e) {
+//            log.warn("Optimistic lock exception for product ");
+//        }
+
     }
 
 }

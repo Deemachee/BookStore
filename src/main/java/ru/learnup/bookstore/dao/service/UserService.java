@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import ru.learnup.bookstore.BookStoreApplication;
 import ru.learnup.bookstore.dao.repository.RolesRepository;
 import ru.learnup.bookstore.dao.repository.UserRepository;
-import ru.learnup.bookstore.dao.user.Role;
-import ru.learnup.bookstore.dao.user.User;
+import ru.learnup.bookstore.dao.entity.Role;
+import ru.learnup.bookstore.dao.entity.User;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.LockModeType;
@@ -116,4 +116,21 @@ public class UserService implements UserDetailsService {
         }
     }
 
+//    PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
+//
+//        UserService userService = context.getBean(UserService.class);
+//
+//        BookService bookService = context.getBean(BookService.class);
+//
+//        bookService.createCatalog();
+//
+//        User user = new User();
+//        user.setUserName("admin");
+//        user.setPassword(passwordEncoder.encode("admin"));
+//        user.setRoles(Set.of(new Role("ROLE_ADMIN")));
+//        Customer customer = new Customer();
+//        customer.setName("Василий");
+//        customer.setSurname("Пупкин");
+//        user.setCustomer(customer);
+//        userService.addUser(user);
 }

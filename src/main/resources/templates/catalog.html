@@ -23,12 +23,11 @@
             <th>Кол-во страниц</th>
             <th>Цена</th>
             <th>Кол-во книг</th>
-            <th>Купить</th>
         </tr>
         </thead>
         <tbody>
         <tr class="thead-light" th:each="book, stat : ${books}">
-            <td th:text="${book.getId()}"></td>
+            <td th:text="${stat.index+1}"></td>
             <td>
                 <img th:src="@{${book.getImgUrl()}}"
                      class="card img-fluid" style="width:50px; height: 50px;" alt=""/>
@@ -39,11 +38,6 @@
             <td th:text="${book.getCount_page()}"></td>
             <td th:text="${book.getPrice()}"></td>
             <td th:text="${book.getWarehouse().getCount()}"></td>
-            <td>
-                <button class="btn-ens-action btn-ens-style">
-<!--                        th:action=""-->
-                        Добавить в корзину </button>
-            </td>
         </tr>
         </tbody>
 
