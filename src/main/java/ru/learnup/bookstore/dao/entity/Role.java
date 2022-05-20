@@ -5,6 +5,8 @@ import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -24,6 +26,11 @@ public class Role implements GrantedAuthority {
 
     @Column
     private String role;
+
+    @Version
+    @Valid
+    @NotBlank
+    private Long version;
 
     public Role(String role) {
         this.role = role;

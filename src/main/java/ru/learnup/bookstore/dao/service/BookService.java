@@ -9,9 +9,9 @@ import ru.learnup.bookstore.BookStoreApplication;
 import ru.learnup.bookstore.dao.entity.Author;
 import ru.learnup.bookstore.dao.entity.Book;
 import ru.learnup.bookstore.dao.entity.Warehouse;
+import ru.learnup.bookstore.dao.filter.BookFilter;
 import ru.learnup.bookstore.dao.repository.BookRepository;
 import ru.learnup.bookstore.specifications.BookSpecification;
-import ru.learnup.bookstore.view.BookView;
 
 import javax.persistence.LockModeType;
 import javax.persistence.OptimisticLockException;
@@ -62,9 +62,15 @@ public class BookService {
         return bookRepository.findByTitleQuery(title);
     }
 
-
+    @Transactional
+    @Lock(value = LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     public Book update(Book book) {
+        try {
             return bookRepository.save(book);
+        } catch (OptimisticLockException e) {
+            log.warn("Optimistic lock exception for update book {}", book.getId());
+            throw e;
+        }
     }
 
     public List<Book> getBookBy(BookFilter filter) {

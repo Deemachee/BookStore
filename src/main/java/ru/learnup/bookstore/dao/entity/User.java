@@ -3,7 +3,10 @@ package ru.learnup.bookstore.dao.entity;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.*;
 
 @Entity
@@ -28,6 +31,11 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
+    @Version
+    @Valid
+    @NotBlank
+    private Long version;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles")

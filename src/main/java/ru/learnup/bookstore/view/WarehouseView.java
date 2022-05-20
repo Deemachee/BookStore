@@ -1,4 +1,5 @@
 package ru.learnup.bookstore.view;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -4,7 +4,10 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -31,6 +34,11 @@ public class Order implements Serializable {
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 
+    @Version
+    @Valid
+    @NotBlank
+    private Long version;
+
     @Override
     public String toString() {
         return "Order{" +
@@ -41,6 +49,9 @@ public class Order implements Serializable {
 
     @Column
     private int amount;
+
+    @Column
+    private Instant date;
 
     public void addOrderDetailToOrder(OrderDetail orderDetail) {
         if (orderDetails == null) {

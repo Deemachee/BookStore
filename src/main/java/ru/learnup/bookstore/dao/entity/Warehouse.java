@@ -15,7 +15,7 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Warehouse implements Serializable{
+public class Warehouse implements Serializable {
 
     private static final long serialVersionUID = -7233678887165593315L;
 

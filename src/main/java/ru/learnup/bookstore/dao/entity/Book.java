@@ -6,6 +6,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -53,6 +55,11 @@ public class Book implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
+
+    @Version
+    @Valid
+    @NotBlank
+    private Long version;
 
     public Book(String title, String imgUrl, int year, int count_page, int price, Author author, Warehouse warehouse) {
         this.title = title;

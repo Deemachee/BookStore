@@ -6,6 +6,7 @@ import ru.learnup.bookstore.dao.entity.User;
 import ru.learnup.bookstore.view.CustomerUserView;
 import ru.learnup.bookstore.view.RoleView;
 import ru.learnup.bookstore.view.UserView;
+
 import java.util.stream.Collectors;
 
 @Component

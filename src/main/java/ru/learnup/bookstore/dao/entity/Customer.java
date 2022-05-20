@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -42,6 +44,10 @@ public class Customer implements Serializable {
             cascade = CascadeType.ALL)
     private User user;
 
+    @Version
+    @Valid
+    @NotBlank
+    private Long version;
 
     @Override
     public String toString() {

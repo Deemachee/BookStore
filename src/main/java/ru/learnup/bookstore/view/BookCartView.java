@@ -11,4 +11,11 @@ public class BookCartView {
 
     private String title;
 
+    @Override
+    public String toString() {
+        return "[" +
+                "title = '" + title + '\'' +
+                ']';
+    }
+
 }

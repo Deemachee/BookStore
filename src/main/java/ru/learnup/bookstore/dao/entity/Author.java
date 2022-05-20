@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,11 @@ public class Author implements Serializable {
 
     @Column(unique = true, name = "author_name")
     private String name;
+
+    @Version
+    @Valid
+    @NotBlank
+    private Long version;
 
     public Author(Long id, String name) {
         this.id = id;

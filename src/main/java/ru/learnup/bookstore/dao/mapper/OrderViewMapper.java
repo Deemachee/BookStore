@@ -25,13 +25,13 @@ public class OrderViewMapper {
         List<OrderDetailView> ods = new ArrayList<>();
         OrderDetailView od = new OrderDetailView();
 
-        for (OrderDetail orDet: orderDetails) {
+        for (OrderDetail orDet : orderDetails) {
             od.setBook(new BookCartView(orDet.getBook().getTitle()));
             od.setQuantity(orDet.getQuantity());
             od.setId(orDet.getId());
             ods.add(od);
         }
-
+        view.setDate(order.getDate());
         view.setOrderDetails(ods);
         return view;
     }

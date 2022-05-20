@@ -11,4 +11,10 @@ public class UserCartView {
 
     private String login;
 
+    @Override
+    public String toString() {
+        return "[" +
+                "пользователь = " + login + '\'' +
+                ']';
+    }
 }

@@ -14,7 +14,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.LockModeType;
 import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -85,6 +87,7 @@ public class OrderController {
 
             entity.setOrderDetails(orderDetails);
             entity.setAmount(amount);
+            entity.setDate(Instant.now());
             orderService.addOrder(entity);
         } catch (OptimisticLockException e) {
             log.warn("Книга отсутствует на складе в необходимом количестве!");

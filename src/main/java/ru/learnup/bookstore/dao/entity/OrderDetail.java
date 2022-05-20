@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -31,13 +33,18 @@ public class OrderDetail implements Serializable {
     @Column
     private int quantity;
 
+    @Version
+    @Valid
+    @NotBlank
+    private Long version;
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderDetail that = (OrderDetail) o;
-        return quantity == that.quantity  && Objects.equals(id, that.id)
+        return quantity == that.quantity && Objects.equals(id, that.id)
                 && Objects.equals(book, that.book) && Objects.equals(order, that.order);
     }
 

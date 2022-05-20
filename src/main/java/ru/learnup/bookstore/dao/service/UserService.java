@@ -53,8 +53,14 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
+    @Lock(value = LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     public User addUser(User user) {
+        try {
         return userRepository.save(user);
+        } catch (OptimisticLockException e) {
+            log.warn("Optimistic lock exception for update user {}", user.getId());
+            throw e;
+        }
     }
 
     @Transactional
@@ -62,7 +68,7 @@ public class UserService implements UserDetailsService {
 
         User exist = userRepository.findByUserName(user.getUsername());
         if (exist != null) {
-            throw new EntityExistsException("login with login "
+            throw new EntityExistsException("user with login "
                     + user.getUsername() + " already exist");
         }
         String password = passwordEncoder.encode(user.getPassword());
@@ -106,7 +112,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    @Lock(value = LockModeType.OPTIMISTIC)
+    @Lock(value = LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     public User update(User user) {
         try {
             return userRepository.save(user);

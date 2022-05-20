@@ -8,8 +8,6 @@ import ru.learnup.bookstore.dao.mapper.CustomerViewMapper;
 import ru.learnup.bookstore.dao.service.CustomerService;
 import ru.learnup.bookstore.dao.service.UserService;
 import ru.learnup.bookstore.view.CustomerView;
-import ru.learnup.bookstore.view.UserCartView;
-import ru.learnup.bookstore.view.UserView;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -46,7 +44,7 @@ public class CustomerController {
     @Secured({"ROLE_ADMIN"})
     @PutMapping("/{login}")
     public CustomerView updateCustomer(@PathVariable("login") String login,
-                               @RequestBody CustomerView body) {
+                                       @RequestBody CustomerView body) {
         if (body.getUser().getLogin() == null) {
             throw new EntityNotFoundException("Try to found null entity");
         }

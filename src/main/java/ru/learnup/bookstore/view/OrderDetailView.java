@@ -16,4 +16,13 @@ public class OrderDetailView {
     private BookCartView book;
 
     private int quantity;
+
+    @Override
+    public String toString() {
+        return "[" +
+                "id = " + id +
+                ", book" + book +
+                ", quantity = " + quantity +
+                ']';
+    }
 }

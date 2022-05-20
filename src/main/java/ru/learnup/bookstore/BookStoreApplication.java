@@ -2,8 +2,10 @@ package ru.learnup.bookstore;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.jms.annotation.EnableJms;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.learnup.bookstore.dao.entity.Customer;
 import ru.learnup.bookstore.dao.entity.Role;
@@ -15,6 +17,8 @@ import java.util.Set;
 
 
 @SpringBootApplication
+@ServletComponentScan
+@EnableJms
 public class BookStoreApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) throws Exception {

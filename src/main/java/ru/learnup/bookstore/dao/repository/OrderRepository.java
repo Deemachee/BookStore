@@ -8,6 +8,4 @@ import ru.learnup.bookstore.dao.entity.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-//    @Query(value = "from Order o join fetch o.orderDetail where o.id = :id")
-//    Order findByIdQuery(long id);
 }

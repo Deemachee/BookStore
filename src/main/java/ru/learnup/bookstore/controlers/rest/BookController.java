@@ -6,7 +6,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import ru.learnup.bookstore.BookStoreApplication;
 import ru.learnup.bookstore.dao.entity.Book;
-import ru.learnup.bookstore.dao.service.BookFilter;
+import ru.learnup.bookstore.dao.filter.BookFilter;
 import ru.learnup.bookstore.dao.service.BookService;
 import ru.learnup.bookstore.dao.mapper.BookViewMapper;
 import ru.learnup.bookstore.view.BookView;

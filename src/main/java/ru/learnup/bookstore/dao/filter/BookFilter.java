@@ -1,4 +1,4 @@
-package ru.learnup.bookstore.dao.service;
+package ru.learnup.bookstore.dao.filter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

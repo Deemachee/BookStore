@@ -29,7 +29,7 @@ public class ExceptionProcessor {
         List<String> stackTrace = Arrays.stream(ex.getStackTrace())
                 .map(Objects::toString)
                 .collect(Collectors.toList());
-        log.error("",ex);
+        log.error("", ex);
         return new ResponseEntity<>(stackTrace, HttpStatus.BAD_REQUEST);
     }
 

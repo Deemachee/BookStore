@@ -49,7 +49,7 @@ public class AuthorService {
     }
 
     @Transactional
-    @Lock(value = LockModeType.OPTIMISTIC)
+    @Lock(value = LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     public Author update(Author author) {
         try {
             return authorRepository.save(author);
