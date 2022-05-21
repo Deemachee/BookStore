@@ -1,19 +1,15 @@
 package ru.learnup.bookstore.view;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class OrderCartView {
+public class OrderDetailCartView {
 
-    private UserCartView customer;
+    private BookCartView book;
 
-    private List<OrderDetailCartView> orderDetails;
+    private int quantity;
 }

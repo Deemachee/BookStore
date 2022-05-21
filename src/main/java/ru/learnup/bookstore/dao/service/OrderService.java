@@ -56,7 +56,7 @@ public class OrderService {
         return orderRepository.findById(id);
     }
 
-    public String ordersOfCustomerFromMonth(String login) {
+    public List<OrderView> ordersOfCustomerFromMonth(String login) {
 
         long current = Instant.now().getEpochSecond();
         long min = current - 2592000000L;
@@ -78,7 +78,7 @@ public class OrderService {
                     findOrders.add(view);
                 }
             }
-            return "Все заказы пользователя " + login + " за месяц: " + findOrders.toString();
+            return findOrders;
         }
     }
 
