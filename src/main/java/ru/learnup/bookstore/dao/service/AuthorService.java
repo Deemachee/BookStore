@@ -28,6 +28,7 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
+    @Transactional
     public Author addAuthor(Author author) {
         return authorRepository.save(author);
     }

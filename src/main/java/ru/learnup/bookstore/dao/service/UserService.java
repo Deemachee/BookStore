@@ -53,14 +53,8 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    @Lock(value = LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     public User addUser(User user) {
-        try {
         return userRepository.save(user);
-        } catch (OptimisticLockException e) {
-            log.warn("Optimistic lock exception for update user {}", user.getId());
-            throw e;
-        }
     }
 
     @Transactional

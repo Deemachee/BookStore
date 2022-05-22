@@ -48,7 +48,6 @@ public class OrderController {
 
 
     @Secured({"ROLE_ADMIN", "ROLE_USER"})
-    @Transactional
     @PostMapping
     public Boolean createOrder(@RequestBody OrderCartView body) {
 
